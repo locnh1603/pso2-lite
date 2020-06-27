@@ -1,0 +1,18 @@
+{
+  "code": "m-forest-forest-rice",
+  "name":"Forst Rice",
+  "location": "forest",
+  "class" : {
+    "category":"grain",
+    "size":"medium"
+  },
+  "rarity": 3,
+  "usedIn": {
+    "food": "",
+    "craft":"",
+    "order":""
+  },
+  "type":"mining"
+}
+
+
