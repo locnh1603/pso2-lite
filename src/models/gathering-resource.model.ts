@@ -13,6 +13,14 @@ export class GatheringResource {
     craft: string
   }
   type: GatheringResourceTypeEnums
+
+  constructor () {
+    this.id = '';
+    this.code = '';
+    this.name = '';
+    this.location = '';
+    this.rarity = 0;
+  }
 }
 
 export class GatheringResourceClass {
