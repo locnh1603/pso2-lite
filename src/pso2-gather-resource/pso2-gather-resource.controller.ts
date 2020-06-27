@@ -1,12 +1,8 @@
 import * as mongoose from 'mongoose';
-import { GatherResouceSchema } from 'src/schemas/pso2-gather-resources.schema';
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { GatheringResource } from 'src/models/gathering-resource.model';
 import { GatherResourceService } from 'src/pso2-gather-resource/pso2-gather-resource.service';
-import { Observable, of } from 'rxjs';
-
-
-
+import { GatherResouceSchema } from 'src/pso2-gather-resource/pso2-gather-resources.schema';
 
 @Controller('gather-resource')
 export class GatherResourceController {
