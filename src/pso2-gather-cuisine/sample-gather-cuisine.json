@@ -1,0 +1,14 @@
+{
+  "name": "Forest Tomato Salad",
+  "buff" : {
+    "category":"vegetable"
+  },
+  "madeFrom": [
+    {
+      "resourceCode": "m-naverius-forest-forest-tomato",
+      "amount":10
+    }
+  ]
+}
+
+
