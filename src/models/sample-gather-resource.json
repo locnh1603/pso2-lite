@@ -1,7 +1,8 @@
 {
-  "code": "m-forest-forest-rice",
-  "name":"Forst Rice",
+  "code": "m-naverius-forest-forest-rice",
+  "name":"Forest Rice",
   "location": "forest",
+  "region": "naverius",
   "class" : {
     "category":"grain",
     "size":"medium"
