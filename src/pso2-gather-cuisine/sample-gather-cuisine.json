@@ -3,7 +3,7 @@
   "buff" : {
     "category":"vegetable"
   },
-  "madeFrom": [
+  "recipe": [
     {
       "resourceCode": "m-naverius-forest-forest-tomato",
       "amount":10
