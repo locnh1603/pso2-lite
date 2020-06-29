@@ -1,4 +1,4 @@
-import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/models/gathering-resource.enum";
+import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/gather-resource.enum";
 
 export interface GatherQueryDto {
   name: string;

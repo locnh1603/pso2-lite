@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums, GatheringResourceTypeEnums } from 'src/models/gathering-resource.enum';
+import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums, GatheringResourceTypeEnums } from 'src/shared/gather-resource.enum';
 
 export const GatherResouceSchema = new mongoose.Schema({
   id: String,
