@@ -10,7 +10,7 @@ export class GatherQueryController {
   GatherResourceModel = mongoose.model('GatherResource', GatherResouceSchema);
 
   @Post()
-  query(@Body() queryDto: GatherQueryDto): Promise<mongoose.Document[]> {
+  query(@Body() queryDto: GatherQueryDto) {
     return this.queryService.query(queryDto);
   } 
 }
