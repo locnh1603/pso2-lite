@@ -1,13 +1,13 @@
 {
-  "code": "m-naverius-forest-forest-rice",
-  "name":"Forest Rice",
-  "location": "forest",
+  "code": "m-naverius-tundra-tundra-spring-onion",
+  "name":"Tundra Spring Onion",
+  "location": "tundra",
   "region": "naverius",
   "class" : {
-    "category":"grain",
+    "category":"vegetable",
     "size":"medium"
   },
-  "rarity": 3,
+  "rarity": 1,
   "usedIn": {
     "food": "",
     "craft":"",
