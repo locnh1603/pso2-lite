@@ -1,0 +1,19 @@
+{
+  "code": "m-naverius-tundra-tundra-spring-onion",
+  "name":"Tundra Spring Onion",
+  "location": "tundra",
+  "region": "naverius",
+  "class" : {
+    "category":"vegetable",
+    "size":"medium"
+  },
+  "rarity": 1,
+  "usedIn": {
+    "food": "",
+    "craft":"",
+    "order":""
+  },
+  "type":"mining"
+}
+
+

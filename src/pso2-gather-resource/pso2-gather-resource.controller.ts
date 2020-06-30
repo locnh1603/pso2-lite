@@ -1,12 +1,7 @@
 import * as mongoose from 'mongoose';
-import { GatherResouceSchema } from 'src/schemas/pso2-gather-resources.schema';
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { GatheringResource } from 'src/models/gathering-resource.model';
 import { GatherResourceService } from 'src/pso2-gather-resource/pso2-gather-resource.service';
-import { Observable, of } from 'rxjs';
-
-
-
+import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/pso2-gather-resources.interface';
 
 @Controller('gather-resource')
 export class GatherResourceController {
@@ -18,7 +13,7 @@ export class GatherResourceController {
     return this.gatherResourceService.findAll();
   }
   @Post()
-  create(@Body() gatheringResource: GatheringResource): Promise<mongoose.Document> {
+  create(@Body() gatheringResource: GatherResource): Promise<mongoose.Document> {
     return this.gatherResourceService.create(gatheringResource);
   }
 }
