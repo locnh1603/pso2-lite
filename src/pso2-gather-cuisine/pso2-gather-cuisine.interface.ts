@@ -5,11 +5,16 @@ export const GatherCuisineSchema = new mongoose.Schema({
   id: String,
   name: String,
   buff: {
-    category: String,
-    size: String
+    class: {
+      category: String,
+      size: String,
+      value: Number
+    },
+    collectRate: Number,
+    fishingRate: Number
   },
   recipe: [{
-    resourceCode: String,
+    resource: String,
     amount: Number
   }]
 });
@@ -17,11 +22,23 @@ export const GatherCuisineSchema = new mongoose.Schema({
 export interface GatherCuisine {
   id: string;
   name: string;
-  buff: GatherResourceClass;
+  buff: GatherCuisineBuff;
   recipe: CuisineRecipe[]
 }
 
+interface GatherCuisineClassBuff {
+  category: string;
+  size: string;
+  value: number;
+}
+
+interface GatherCuisineBuff {
+  class: GatherCuisineClassBuff;
+  collectRate: number;
+  fishingRate: number;
+}
+
 interface CuisineRecipe {
-  resourceCode: string;
+  resource: string;
   amount: number;
 }

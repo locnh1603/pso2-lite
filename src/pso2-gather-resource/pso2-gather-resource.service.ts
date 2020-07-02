@@ -8,6 +8,7 @@ export class GatherResourceService {
   private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
 
   create(resource: GatherResource): Promise<mongoose.Document> {
+    resource.name = resource.name.toLowerCase();
     const document = new this.GatherResourceModel(resource);
     return document.save()
   }

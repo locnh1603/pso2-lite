@@ -16,7 +16,7 @@ export class GatherQueryService {
       (resources: mongoose.Document[]) => {
         const categories = [];
         const sizes = [];
-        const codes = [];
+        const names = [];
         const buffQuery = [];
         const recipeQuery = [];
 
@@ -27,8 +27,8 @@ export class GatherQueryService {
           if(!sizes.find(c => c === res.toObject().class.size)) {
             sizes.push(res.toObject().class.size)
           }
-          if(!codes.find(c => c === res.toObject().code)) {
-            codes.push(res.toObject().code)
+          if(!names.find(n => n === res.toObject().name)) {
+            names.push(res.toObject().name)
           }
         })
 
@@ -48,13 +48,14 @@ export class GatherQueryService {
           })
         })
 
-        codes.forEach(c => {
+        names.forEach(n => {
           recipeQuery.push({
             recipe: {
-              $elemMatch: {resourceCode: c}
+              $elemMatch: {resource: n}
             }
           })
         })
+
         return Promise.all([
           this.GatherCuisineModel.find({
             "$or": buffQuery
@@ -87,16 +88,16 @@ export class GatherQueryService {
         const recipeQuery = [];
 
         cuisines.forEach(res => {
-          if(!categories.find(c => c === res.toObject().buff.category) && !!res.toObject().buff.category) {
-            categories.push(res.toObject().buff.category);
+          if(!categories.find(c => c === res.toObject().buff.class.category) && !!res.toObject().buff.class.category) {
+            categories.push(res.toObject().buff.class.category);
           }
-          if(!sizes.find(c => c === res.toObject().buff.size) && !!res.toObject().buff.size) {
-            sizes.push(res.toObject().buff.size);
+          if(!sizes.find(c => c === res.toObject().buff.class.size) && !!res.toObject().buff.class.size) {
+            sizes.push(res.toObject().buff.class.size);
           }
           res.toObject().recipe.forEach(
             ing => {
-              if(!ingredients.find(c => c === ing.resourceCode)) {
-                ingredients.push(ing.resourceCode);
+              if(!ingredients.find(c => c === ing.resource)) {
+                ingredients.push(ing.resource);
               }
             }
           )
@@ -120,7 +121,7 @@ export class GatherQueryService {
 
         ingredients.forEach(i => {
           recipeQuery.push({
-            code: i
+            name: i
           })
         })
 
