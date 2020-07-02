@@ -11,7 +11,7 @@ export class GatherQueryService {
   private readonly GatherCuisineModel = mongoose.model('pso2-gather-lite.cuisines', GatherCuisineSchema)
 
   queryResource(queryDto: GatherResourceQueryDto) {
-
+    console.log(queryDto);
     return this.GatherResourceModel.find(queryDto).exec().then(
       (resources: mongoose.Document[]) => {
         const categories = [];
@@ -55,7 +55,6 @@ export class GatherQueryService {
             }
           })
         })
-
         return Promise.all([
           this.GatherCuisineModel.find({
             "$or": buffQuery
