@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
 import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums, GatheringResourceTypeEnums } from 'src/shared/gather-resource.enum';
+import { ApiProperty } from '@nestjs/swagger';
+import { GatherResourceClass } from 'src/shared/gather-resource-class.interface';
 
 export const GatherResouceSchema = new mongoose.Schema({
   id: String,
@@ -14,17 +16,22 @@ export const GatherResouceSchema = new mongoose.Schema({
   type: String
 });
 
-export interface GatherResource {
+export class GatherResource {
+  @ApiProperty()
   id: string;
+  @ApiProperty()
   name: string;
+  @ApiProperty()
   region: string;
+  @ApiProperty()
   location: string[];
+  @ApiProperty({
+    type: GatherResourceClass
+  })
   class: GatherResourceClass;
+  @ApiProperty()
   rarity: number;
+  @ApiProperty({enum: GatheringResourceTypeEnums})
   type: GatheringResourceTypeEnums
 }
 
-interface GatherResourceClass {
-  category: GatheringResourceCategoryEnums;
-  size: GatheringResourceSizeEnums
-}

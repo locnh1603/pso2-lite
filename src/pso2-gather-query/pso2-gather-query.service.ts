@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as util from 'util'
 import { Injectable } from '@nestjs/common';
 import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/pso2-gather-resources.interface';
 import { GatherResourceQueryDto, GatherCuisineQueryDto } from 'src/pso2-gather-query/pso2-gather-query.interface';
@@ -11,7 +12,6 @@ export class GatherQueryService {
   private readonly GatherCuisineModel = mongoose.model('pso2-gather-lite.cuisines', GatherCuisineSchema)
 
   queryResource(queryDto: GatherResourceQueryDto) {
-    console.log(queryDto);
     return this.GatherResourceModel.find(queryDto).exec().then(
       (resources: mongoose.Document[]) => {
         const categories = [];
@@ -34,17 +34,13 @@ export class GatherQueryService {
 
         categories.forEach(c => {
           buffQuery.push({
-            buff: {
-              category: c
-            }
+            'buff.class.category': c
           })
         })
 
         sizes.forEach(s => {
           buffQuery.push({
-            buff: {
-              size: s
-            }
+            'buff.class.size': s
           })
         })
 
@@ -60,8 +56,12 @@ export class GatherQueryService {
           this.GatherCuisineModel.find({
             "$or": buffQuery
           }),
-          this.GatherCuisineModel.find({
-            "$or": recipeQuery
+          Promise.all([
+            this.GatherCuisineModel.find({
+              "$or": recipeQuery
+            }),
+          ]).then(([recipes]) => {
+            return recipes
           }),
           resources
         ]) 
@@ -126,6 +126,7 @@ export class GatherQueryService {
         })
 
         return Promise.all([
+          classQuery,
           this.GatherResourceModel.find({
             $or: classQuery
           }),
@@ -135,11 +136,12 @@ export class GatherQueryService {
           cuisines
         ])
       }).then(
-        ([usedFor, recipe, cuisines]) => {
+        ([usedForClass, usedFor, recipe, cuisines]) => {
           return {
             query: queryDto,
             cuisines,
             usedFor,
+            usedForClass,
             recipe
           }
         }

@@ -4,7 +4,6 @@ import { GatherCuisine, GatherCuisineSchema } from 'src/pso2-gather-cuisine/pso2
 
 @Injectable()
 export class GatherCuisineService {
-  private resourcesList: GatherCuisine[] = [];
   private readonly GatherCuisineModel = mongoose.model('pso2-gather-lite.cuisines', GatherCuisineSchema)
 
   create(cuisine: GatherCuisine): Promise<mongoose.Document> {
