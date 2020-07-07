@@ -1,11 +1,13 @@
 {
   "name": "Forest Tomato Salad",
   "buff" : {
-    "category":"vegetable"
+    "class": {"category": "vegetable", "value": 200},
+    "collectRate": 5,
+    "fishingRate": 0
   },
   "recipe": [
     {
-      "resourceCode": "m-naverius-forest-forest-tomato",
+      "resource": "forest tomato",
       "amount":10
     }
   ]

@@ -1,42 +1,37 @@
 import * as mongoose from 'mongoose';
 import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums, GatheringResourceTypeEnums } from 'src/shared/gather-resource.enum';
+import { ApiProperty } from '@nestjs/swagger';
+import { GatherResourceClass } from 'src/shared/gather-resource-class.interface';
 
 export const GatherResouceSchema = new mongoose.Schema({
   id: String,
-  code: String,
   name: String,
-  location: String,
+  location: [String],
   region: String,
   class: {
     category: String,
     size: String,
   },
   rarity: Number,
-  usedIn: {
-    food: String,
-    order: String,
-    craft: String
-  },
   type: String
 });
 
-export interface GatherResource {
+export class GatherResource {
+  @ApiProperty()
   id: string;
-  code: string;
+  @ApiProperty()
   name: string;
+  @ApiProperty()
   region: string;
-  location: string;
+  @ApiProperty()
+  location: string[];
+  @ApiProperty({
+    type: GatherResourceClass
+  })
   class: GatherResourceClass;
+  @ApiProperty()
   rarity: number;
-  usedIn: {
-    food: string,
-    order: string,
-    craft: string
-  }
+  @ApiProperty({enum: GatheringResourceTypeEnums})
   type: GatheringResourceTypeEnums
 }
 
-interface GatherResourceClass {
-  category: GatheringResourceCategoryEnums;
-  size: GatheringResourceSizeEnums
-}

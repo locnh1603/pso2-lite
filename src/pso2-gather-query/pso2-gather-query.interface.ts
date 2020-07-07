@@ -1,30 +1,31 @@
 import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/gather-resource.enum";
 import { GatherResource } from "src/pso2-gather-resource/pso2-gather-resources.interface";
 import { GatherCuisine } from "src/pso2-gather-cuisine/pso2-gather-cuisine.interface";
-
-export interface GatherResourceQueryDto {
-  name: string;
-  class: GatherResourceClass;
-  type: string;
-}
-
-export interface GatherCuisineQueryDto {
+import { ApiProperty } from '@nestjs/swagger';
+export class GatherResourceQueryDto {
+  @ApiProperty()
   name: string;
 }
 
-interface GatherResourceClass {
-  category: GatheringResourceCategoryEnums;
-  size: GatheringResourceSizeEnums
+export class GatherCuisineQueryDto {
+  @ApiProperty()
+  name: string;
 }
 
-export interface GatherResourceQueryResult {
-  resource: GatherResource,
-  buffFor: GatherCuisine[],
+export class GatherResourceQueryResult {
+  @ApiProperty({type: GatherResource})
+  resource: GatherResource;
+  @ApiProperty({type: [GatherCuisine]})
+  buffFor: GatherCuisine[];
+  @ApiProperty({type: [GatherCuisine]})
   inRecipe: GatherCuisine[]
 }
 
-export interface GatherCuisineQueryResult {
-  cuisine: GatherCuisine,
-  buffFor: GatherResource[],
+export class GatherCuisineQueryResult {
+  @ApiProperty({type: GatherCuisine})
+  cuisine: GatherCuisine;
+  @ApiProperty({type: [GatherResource]})
+  buffFor: GatherResource[];
+  @ApiProperty({type: [GatherResource]})
   inRecipe: GatherResource[]
 }

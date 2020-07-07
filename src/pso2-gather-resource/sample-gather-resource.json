@@ -1,19 +1,13 @@
 {
-  "code": "m-naverius-tundra-tundra-spring-onion",
-  "name":"Tundra Spring Onion",
-  "location": "tundra",
+  "name":"Tundra Herring",
+  "location": ["tundra"],
   "region": "naverius",
   "class" : {
-    "category":"vegetable",
+    "category":"fish",
     "size":"medium"
   },
   "rarity": 1,
-  "usedIn": {
-    "food": "",
-    "craft":"",
-    "order":""
-  },
-  "type":"mining"
+  "type":"fishing"
 }
 
 
