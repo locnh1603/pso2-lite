@@ -1,8 +1,9 @@
 import * as mongoose from 'mongoose';
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { GatherCuisineSchema, GatherCuisine } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.interface';
 import { GatherCuisineService } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.service';
 import { ApiBody, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
 
 @Controller('gather-cuisines')
 export class GatherCuisineController {
@@ -15,6 +16,7 @@ export class GatherCuisineController {
     return this.gatherCuisineService.findAll();
   }
   
+  @UseGuards(JwtAuthGuard)
   @Post()
   @ApiBody({type: GatherCuisine})
   @ApiResponse({status: 201, type: GatherCuisine})

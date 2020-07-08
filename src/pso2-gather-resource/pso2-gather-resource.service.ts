@@ -4,7 +4,6 @@ import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/ps
 
 @Injectable()
 export class GatherResourceService {
-  private resourcesList: GatherResource[] = [];
   private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
 
   create(resource: GatherResource): Promise<mongoose.Document> {
