@@ -1,23 +1,24 @@
-import { Injectable, Post } from '@nestjs/common';
-import { UserSchema, AdminUser } from 'src/shared/pso2-admin-user.interface';
-import * as mongoose from 'mongoose';
+import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto-js';
 import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { Model } from 'mongoose';
+import { User } from 'src/shared/schemas/admin-user.schema';
+import { UserDto } from 'src/shared/dto/admin-user-dto.model';
 
 @Injectable()
 export class AuthService {
-  private readonly AdminUserModel = mongoose.model('pso2-gather-lite.users', UserSchema)
-
-  constructor(private jwtService: JwtService) {
+  constructor(private jwtService: JwtService, @InjectModel(ModuleNameEnums.admin_user) private userModel: Model<User>) {
     
   }
 
-  validate(userInfo: AdminUser): Promise<mongoose.Document> {
-    const user = this.AdminUserModel.findOne({
+  async validate(userInfo: UserDto): Promise<User> {
+    const user = this.userModel.findOne({
       username: userInfo.username,
       password: crypto.SHA256(userInfo.password).toString(crypto.enc.Hex)
     }).then(
-      (res: mongoose.Document) => {
+      (res: User) => {
         return res
       }
     ).catch(
@@ -28,7 +29,7 @@ export class AuthService {
     return user;
   }
 
-  async login(user: AdminUser) {
+  async login(user: UserDto) {
     const payload = { username: user.username, password: user.password };
     return {
       access_token: this.jwtService.sign(payload),

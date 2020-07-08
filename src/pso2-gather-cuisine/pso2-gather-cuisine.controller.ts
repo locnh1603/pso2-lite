@@ -1,24 +1,25 @@
 import * as mongoose from 'mongoose';
-import { Controller, Get, Post, Body } from '@nestjs/common';
-import { GatherCuisineSchema, GatherCuisine } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.interface';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { GatherCuisineService } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.service';
 import { ApiBody, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
+import { GatherCuisineDto } from 'src/shared/dto/gather-cuisine-dto.model';
+import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 
 @Controller('gather-cuisines')
 export class GatherCuisineController {
   constructor(private gatherCuisineService: GatherCuisineService) {}
-  GatherResourceModel = mongoose.model('gatherCuisine', GatherCuisineSchema);
-
   @Get()
   @ApiResponse({status: 201, type: [GatherCuisine]})
-  findAll(): Promise<mongoose.Document[]> {
+  findAll(): Promise<GatherCuisine[]> {
     return this.gatherCuisineService.findAll();
   }
   
+  @UseGuards(JwtAuthGuard)
   @Post()
-  @ApiBody({type: GatherCuisine})
+  @ApiBody({type: GatherCuisineDto})
   @ApiResponse({status: 201, type: GatherCuisine})
-  create(@Body() cuisine: GatherCuisine): Promise<mongoose.Document> {
+  create(@Body() cuisine: GatherCuisineDto): Promise<GatherCuisine> {
     return this.gatherCuisineService.create(cuisine);
   }
 }

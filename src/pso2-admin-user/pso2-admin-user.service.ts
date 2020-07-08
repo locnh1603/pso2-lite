@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import * as mongoose from 'mongoose'
-import { UserSchema, AdminUser } from 'src/shared/pso2-admin-user.interface';
+import { UserSchema } from 'src/shared/pso2-admin-user.interface';
 import * as crypto from 'crypto-js'
-import { userInfo } from 'os';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { User } from 'src/shared/schemas/admin-user.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class Pso2AdminUserService {
-  private readonly AdminUserModel = mongoose.model('pso2-gather-lite.users', UserSchema) 
+  constructor(@InjectModel(ModuleNameEnums.admin_user) private userModel: Model<User>) {}
 
-  createUser(userInfo: AdminUser): Promise<mongoose.Document> {
-    userInfo.password = crypto.SHA256(userInfo.password).toString(crypto.enc.Hex);
-    const document = new this.AdminUserModel(userInfo);
+  async createUser(userInfo: User): Promise<mongoose.Document> {
+    userInfo.password = crypto.SHA256(userInfo.password.toString()).toString(crypto.enc.Hex);
+    const document = new this.userModel(userInfo);
     return document.save()
   }
 
-  changePwd(newUserInfo: AdminUser): Promise<mongoose.Document> {
+  async changePwd(newUserInfo: User): Promise<mongoose.Document> {
     const username = newUserInfo.username;
-    const password = crypto.SHA256(newUserInfo.password).toString(crypto.enc.Hex);
-    return this.AdminUserModel.findOneAndUpdate({username}, {password}).exec();
+    const password = crypto.SHA256(newUserInfo.password.toString()).toString(crypto.enc.Hex);
+    return this.userModel.findOneAndUpdate({username}, {password});
   }
 }

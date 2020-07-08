@@ -1,12 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import * as env from 'dotenv'
-import './connection'
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { logger } from './shared/middleware/logger';
+import { LoggingInterceptor } from 'src/shared/interceptors/response-logger.interceptor';
+import { HttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
 
-env.config();
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['log', 'error', 'warn']
+  });
+
+  app.useGlobalInterceptors(new LoggingInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableCors();
 
   const options = new DocumentBuilder()
   .setTitle('PSO2 Gatherer API')
@@ -16,7 +22,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   await app.listen(3000).then(
     ()=> {
-      console.log('listening on port 3000')
+      logger.info('App started, listening on port 3000')
     }
   );
 }

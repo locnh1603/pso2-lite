@@ -1,19 +1,23 @@
-import * as mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/pso2-gather-resources.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
+import { Model } from 'mongoose';
+import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
 
 @Injectable()
 export class GatherResourceService {
-  private resourcesList: GatherResource[] = [];
-  private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
+  // private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
 
-  create(resource: GatherResource): Promise<mongoose.Document> {
+  constructor(@InjectModel(ModuleNameEnums.gather_resource) private resourceModel: Model<GatherResource>) {}
+
+  create(resource: GatherResourceDto): Promise<GatherResource> {
     resource.name = resource.name.toLowerCase();
-    const document = new this.GatherResourceModel(resource);
-    return document.save()
+    const document = new this.resourceModel(resource);
+    return document.save();
   }
 
-  findAll(): Promise<mongoose.Document[]> {
-    return this.GatherResourceModel.find({}).exec();
+  findAll(): Promise<GatherResource[]> {
+    return this.resourceModel.find({}).exec();
   }
 }

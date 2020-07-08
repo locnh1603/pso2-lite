@@ -1,25 +1,26 @@
 import * as mongoose from 'mongoose';
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { GatherResourceService } from 'src/pso2-gather-resource/pso2-gather-resource.service';
-import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/pso2-gather-resources.interface';
 import { ApiResponse, ApiBody } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
+import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
+import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
 
 @Controller('gather-resources')
 export class GatherResourceController {
   constructor(private gatherResourceService: GatherResourceService) {}
-  GatherResourceModel = mongoose.model('GatherResource', GatherResouceSchema);
 
   @Get()
   @ApiResponse({status: 201, type: [GatherResource]})
-  findAll(): Promise<mongoose.Document[]> {
+  findAll(): Promise<GatherResource[]> {
     return this.gatherResourceService.findAll();
   }
 
-
+  @UseGuards(JwtAuthGuard)
   @Post()
-  @ApiBody({type: GatherResource})
+  @ApiBody({type: GatherResourceDto})
   @ApiResponse({status: 201, type: GatherResource})
-  create(@Body() gatheringResource: GatherResource): Promise<mongoose.Document> {
+  create(@Body() gatheringResource: GatherResourceDto): Promise<GatherResource> {
     return this.gatherResourceService.create(gatheringResource);
   }
 }

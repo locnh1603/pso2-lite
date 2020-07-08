@@ -1,24 +1,5 @@
-import * as mongoose from 'mongoose';
-import { GatherResourceClass, CraftRecipe } from 'src/shared/gather-resource-class.interface';
-import { ApiProperty } from '@nestjs/swagger';
-
-export const GatherCuisineSchema = new mongoose.Schema({
-  id: String,
-  name: String,
-  buff: {
-    class: {
-      category: String,
-      size: String,
-      value: Number
-    },
-    collectRate: Number,
-    fishingRate: Number
-  },
-  recipe: [{
-    resource: String,
-    amount: Number
-  }]
-});
+import { ApiProperty } from "@nestjs/swagger";
+import { CraftRecipe } from "src/shared/gather-resource-class.interface";
 
 export class GatherCuisineClassBuff {
   @ApiProperty()
@@ -38,7 +19,7 @@ export class GatherCuisineBuff {
   fishingRate: number;
 }
 
-export class GatherCuisine {
+export class GatherCuisineDto {
   @ApiProperty()
   id: string;
   @ApiProperty()
@@ -48,7 +29,4 @@ export class GatherCuisine {
   @ApiProperty({type: [CraftRecipe]})
   recipe: CraftRecipe[]
 }
-
-
-
 

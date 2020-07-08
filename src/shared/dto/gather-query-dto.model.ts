@@ -1,7 +1,7 @@
-import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/gather-resource.enum";
-import { GatherResource } from "src/pso2-gather-resource/pso2-gather-resources.interface";
-import { GatherCuisine } from "src/pso2-gather-cuisine/pso2-gather-cuisine.interface";
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
+import { GatherResource } from "src/shared/schemas/gather-resource.schema";
+import { GatherCuisine } from "src/shared/schemas/gather-cuisine.schema";
+
 export class GatherResourceQueryDto {
   @ApiProperty()
   name: string;
@@ -15,9 +15,9 @@ export class GatherCuisineQueryDto {
 export class GatherResourceQueryResult {
   @ApiProperty({type: GatherResource})
   resource: GatherResource;
-  @ApiProperty({type: [GatherCuisine]})
+  @ApiProperty({type: [GatherResource]})
   buffFor: GatherCuisine[];
-  @ApiProperty({type: [GatherCuisine]})
+  @ApiProperty({type: [GatherResource]})
   inRecipe: GatherCuisine[]
 }
 

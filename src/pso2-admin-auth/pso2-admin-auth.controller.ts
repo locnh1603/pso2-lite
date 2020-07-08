@@ -2,7 +2,8 @@ import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from 'src/pso2-admin-auth/pso2-admin-auth.service';
 import { LocalAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { AdminUser } from 'src/shared/pso2-admin-user.interface';
+import { UserDto } from 'src/shared/dto/admin-user-dto.model';
+import { logger } from 'src/shared/middleware/logger';
 
 @Controller('admin-auth')
 export class Pso2AdminAuthController {
@@ -11,8 +12,8 @@ export class Pso2AdminAuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  @ApiBody({type: AdminUser})
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  @ApiBody({type: UserDto})
+  login(@Body() user: UserDto) {
+    return this.authService.login(user);
   }
 }
