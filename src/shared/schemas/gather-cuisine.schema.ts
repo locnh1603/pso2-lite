@@ -2,7 +2,7 @@ import { Schema, Prop, raw, SchemaFactory } from "@nestjs/mongoose";
 import { Document  } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherCuisineBuff } from "src/shared/dto/gather-cuisine-dto.model";
-import { CraftRecipe } from "src/shared/gather-resource-class.interface";
+import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 
 @Schema()
 export class GatherCuisine extends Document {

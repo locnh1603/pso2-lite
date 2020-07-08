@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { CraftRecipe } from "src/shared/gather-resource-class.interface";
+import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 
 export class GatherCuisineClassBuff {
   @ApiProperty()

@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory, raw } from "@nestjs/mongoose";
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
-import { GatherResourceClass } from "src/shared/gather-resource-class.interface";
+import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
 
 @Schema()
 export class GatherResource extends Document {

@@ -3,7 +3,7 @@ import { AuthService } from 'src/pso2-admin-auth/pso2-admin-auth.service';
 import { LocalAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { UserDto } from 'src/shared/dto/admin-user-dto.model';
-import { logger } from 'src/shared/middleware/logger';
+import { logger } from 'src/shared/helpers/logger';
 
 @Controller('admin-auth')
 export class Pso2AdminAuthController {
