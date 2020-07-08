@@ -5,6 +5,9 @@ import { LocalStrategy } from 'src/pso2-admin-auth/strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { KeyEnums } from 'src/shared/pso2-lite.enum';
 import { JwtStrategy } from 'src/pso2-admin-auth/strategies/jwt.strategy';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { UserSchema } from 'src/shared/schemas/admin-user.schema';
 
 @Global()
 @Module({
@@ -13,8 +16,9 @@ import { JwtStrategy } from 'src/pso2-admin-auth/strategies/jwt.strategy';
       secret: KeyEnums.skey,
       signOptions: { expiresIn: '3600s' },
     }),
+    MongooseModule.forFeature([{name: ModuleNameEnums.admin_user, schema: UserSchema}])
   ],
-  providers: [AuthService,LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [Pso2AdminAuthController]
 })
 export class Pso2AdminAuthModule {}

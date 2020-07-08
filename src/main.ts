@@ -1,9 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { logger } from './shared/middleware/logger'
-import './connection'
-import { RoutingLoggerMiddleware } from 'src/shared/middleware/logger.middleware';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { logger } from './shared/middleware/logger';
 import { LoggingInterceptor } from 'src/shared/interceptors/response-logger.interceptor';
 import { HttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
 
@@ -12,7 +10,6 @@ async function bootstrap() {
     logger: ['log', 'error', 'warn']
   });
 
-  app.use(RoutingLoggerMiddleware);
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors();

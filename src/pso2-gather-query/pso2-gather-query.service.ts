@@ -1,18 +1,24 @@
 import * as mongoose from 'mongoose';
-import * as util from 'util'
 import { Injectable } from '@nestjs/common';
-import { GatherResouceSchema, GatherResource } from 'src/pso2-gather-resource/pso2-gather-resources.interface';
-import { GatherResourceQueryDto, GatherCuisineQueryDto } from 'src/pso2-gather-query/pso2-gather-query.interface';
-import { GatherCuisineSchema } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { Model } from 'mongoose';
+import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
+import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
+import { GatherResourceQueryDto, GatherCuisineQueryDto } from 'src/shared/dto/gather-query-dto.model';
 
 @Injectable()
 export class GatherQueryService {
-  private resourcesList: GatherResource[] = [];
-  private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
-  private readonly GatherCuisineModel = mongoose.model('pso2-gather-lite.cuisines', GatherCuisineSchema)
+
+  constructor(
+    @InjectModel(ModuleNameEnums.gather_resource) 
+    private resourceModel: Model<GatherResource>,
+    @InjectModel(ModuleNameEnums.gather_cuisine) 
+    private cuisineModel: Model<GatherCuisine>,
+  ) {}
 
   queryResource(queryDto: GatherResourceQueryDto) {
-    return this.GatherResourceModel.find(queryDto).exec().then(
+    return this.resourceModel.find(queryDto).exec().then(
       (resources: mongoose.Document[]) => {
         const categories = [];
         const sizes = [];
@@ -53,11 +59,11 @@ export class GatherQueryService {
         })
 
         return Promise.all([
-          this.GatherCuisineModel.find({
+          this.cuisineModel.find({
             "$or": buffQuery
           }),
           Promise.all([
-            this.GatherCuisineModel.find({
+            this.cuisineModel.find({
               "$or": recipeQuery
             }),
           ]).then(([recipes]) => {
@@ -79,7 +85,7 @@ export class GatherQueryService {
   }
 
   queryCuisine(queryDto: GatherCuisineQueryDto) {
-    return this.GatherCuisineModel.find(queryDto).exec().then(
+    return this.cuisineModel.find(queryDto).exec().then(
       (cuisines: mongoose.Document[]) => {
         const ingredients = [];
         const categories = [];
@@ -127,10 +133,10 @@ export class GatherQueryService {
 
         return Promise.all([
           classQuery,
-          this.GatherResourceModel.find({
+          this.resourceModel.find({
             $or: classQuery
           }),
-          this.GatherResourceModel.find({
+          this.resourceModel.find({
             $or: recipeQuery
           }),
           cuisines

@@ -1,23 +1,27 @@
 import * as mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { GatherCuisine, GatherCuisineSchema } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { Model } from 'mongoose';
+import { GatherCuisineDto } from 'src/shared/dto/gather-cuisine-dto.model';
+import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 
 @Injectable()
 export class GatherCuisineService {
-  private readonly GatherCuisineModel = mongoose.model('pso2-gather-lite.cuisines', GatherCuisineSchema)
+  constructor(@InjectModel(ModuleNameEnums.gather_cuisine) private resourceModel: Model<GatherCuisine>) {}
 
-  create(cuisine: GatherCuisine): Promise<mongoose.Document> {
+  create(cuisine: GatherCuisineDto): Promise<GatherCuisine> {
     cuisine.name = cuisine.name.toLowerCase();
     cuisine.recipe = cuisine.recipe.map(i => {
       const newIng = i;
       newIng.resource = newIng.resource.toLowerCase();
       return newIng;
     })
-    const document = new this.GatherCuisineModel(cuisine);
+    const document = new this.resourceModel(cuisine);
     return document.save()
   }
 
-  findAll(): Promise<mongoose.Document[]> {
-    return this.GatherCuisineModel.find({}).exec();
+  findAll(): Promise<GatherCuisine[]> {
+    return this.resourceModel.find({}).exec();
   }
 }

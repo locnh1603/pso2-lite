@@ -3,6 +3,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from 'src/pso2-admin-auth/pso2-admin-auth.service';
 import crypto from 'crypto-js';
+import { User } from 'src/shared/schemas/admin-user.schema';
+import { UserDto } from 'src/shared/dto/admin-user-dto.model';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -11,13 +13,16 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(username, password): Promise<any> {
-    const userInfo = {
+    
+    const userInfo: UserDto = {
       username, password
     }
+
     const user = await this.authService.validate(userInfo);
     if (!user) {
       throw new UnauthorizedException();
     }
-    return user;
+    userInfo.password = user.password.toString();
+    return userInfo;
   }
 }
