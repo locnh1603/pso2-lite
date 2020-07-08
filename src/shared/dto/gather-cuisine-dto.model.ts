@@ -24,6 +24,8 @@ export class GatherCuisineDto {
   id: string;
   @ApiProperty()
   name: string;
+  @ApiProperty()
+  type: string;
   @ApiProperty({type: GatherCuisineBuff})
   buff: GatherCuisineBuff;
   @ApiProperty({type: [CraftRecipe]})
