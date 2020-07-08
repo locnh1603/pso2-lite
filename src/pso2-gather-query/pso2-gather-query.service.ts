@@ -6,6 +6,7 @@ import { Model } from 'mongoose';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 import { GatherResourceQueryDto, GatherCuisineQueryDto } from 'src/shared/dto/gather-query-dto.model';
+import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
 
 @Injectable()
 export class GatherQueryService {
@@ -15,6 +16,8 @@ export class GatherQueryService {
     private resourceModel: Model<GatherResource>,
     @InjectModel(ModuleNameEnums.gather_cuisine) 
     private cuisineModel: Model<GatherCuisine>,
+    @InjectModel(ModuleNameEnums.gather_craft) 
+    private craftModel: Model<GatherCraft>
   ) {}
 
   queryResource(queryDto: GatherResourceQueryDto) {
@@ -66,8 +69,11 @@ export class GatherQueryService {
             this.cuisineModel.find({
               "$or": recipeQuery
             }),
-          ]).then(([recipes]) => {
-            return recipes
+            this.craftModel.find({
+              "$or": recipeQuery
+            })
+          ]).then(([cuisines, crafts]) => {
+            return [...cuisines, ...crafts]
           }),
           resources
         ]) 

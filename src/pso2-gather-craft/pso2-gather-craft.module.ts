@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
-import { Pso2GatherCraftService } from './pso2-gather-craft.service';
-import { Pso2GatherCraftController } from './pso2-gather-craft.controller';
+import { GatherCraftController } from 'src/pso2-gather-craft/pso2-gather-craft.controller';
+import { GatherCraftService } from 'src/pso2-gather-craft/pso2-gather-craft.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { GatherCraftSchema } from 'src/shared/schemas/gather-craft.schema';
 
 @Module({
-  providers: [Pso2GatherCraftService],
-  controllers: [Pso2GatherCraftController]
+  imports: [MongooseModule.forFeature([{name: ModuleNameEnums.gather_craft, schema: GatherCraftSchema}])],
+  providers: [GatherCraftService],
+  controllers: [GatherCraftController]
 })
-export class Pso2GatherCraftModule {}
+export class GatherCraftModule {}

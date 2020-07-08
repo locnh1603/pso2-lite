@@ -12,7 +12,7 @@ export class LoggingInterceptor implements NestInterceptor {
       .handle()
       .pipe(
         tap((data) => {
-          logger.info(`request success, return ${data.length + 1 || 0} records after ${Date.now() - now}ms`);
+          logger.info(`request success, return ${data.length || 0} records after ${Date.now() - now}ms`);
         })
       )
   }

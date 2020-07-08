@@ -14,6 +14,10 @@ export class GatherCuisine extends Document {
   @ApiProperty()
   name: string;
 
+  @Prop()
+  @ApiProperty()
+  type: string;
+
   @Prop(raw({
     class: {type: {
       category: { type: String },
