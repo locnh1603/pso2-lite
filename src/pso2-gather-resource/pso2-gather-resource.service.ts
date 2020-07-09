@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { Model } from 'mongoose';
 import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';

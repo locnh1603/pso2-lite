@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { Model } from 'mongoose';
 import { GatherCraftDto } from 'src/shared/dto/gather-craft-dto.model';
 

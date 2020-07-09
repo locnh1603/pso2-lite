@@ -1,4 +1,4 @@
-import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/gather-resource.enum";
+import { GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/enum/gather-resource.enum";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class GatherResourceClass {

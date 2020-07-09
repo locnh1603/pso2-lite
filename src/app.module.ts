@@ -12,6 +12,8 @@ import { GatherResourceController } from 'src/pso2-gather-resource/pso2-gather-r
 import { GatherQueryController } from 'src/pso2-gather-query/pso2-gather-query.controller';
 import { GatherCraftController } from 'src/pso2-gather-craft/pso2-gather-craft.controller';
 import { GatherCraftModule } from 'src/pso2-gather-craft/pso2-gather-craft.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
 
 @Module({
   imports: [
@@ -25,6 +27,9 @@ import { GatherCraftModule } from 'src/pso2-gather-craft/pso2-gather-craft.modul
       isGlobal: true
     }),
     MongooseModule.forRoot(process.env.DB_URL),
+  ],
+  providers: [
+    RequestValidatorGuard
   ]
 })
 export class AppModule {

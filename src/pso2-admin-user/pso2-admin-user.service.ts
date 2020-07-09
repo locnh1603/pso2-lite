@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as mongoose from 'mongoose'
-import { UserSchema } from 'src/shared/pso2-admin-user.interface';
 import * as crypto from 'crypto-js'
-import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { User } from 'src/shared/schemas/admin-user.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';

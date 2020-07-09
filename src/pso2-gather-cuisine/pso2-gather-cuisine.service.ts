@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ModuleNameEnums } from 'src/shared/module_name.enum';
+import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { Model } from 'mongoose';
 import { GatherCuisineDto } from 'src/shared/dto/gather-cuisine-dto.model';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';

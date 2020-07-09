@@ -1,7 +1,7 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { KeyEnums } from 'src/shared/pso2-lite.enum';
+import { KeyEnums } from 'src/shared/enum/pso2-lite.enum';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

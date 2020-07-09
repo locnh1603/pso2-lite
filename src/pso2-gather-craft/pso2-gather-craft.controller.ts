@@ -4,6 +4,7 @@ import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
 import { GatherCraftService } from 'src/pso2-gather-craft/pso2-gather-craft.service';
 import { GatherCraftDto } from 'src/shared/dto/gather-craft-dto.model';
 import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
+import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
 
 @Controller('gather-crafts')
 export class GatherCraftController { 
@@ -15,7 +16,7 @@ export class GatherCraftController {
     return this.craftService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RequestValidatorGuard)
   @Post()
   @ApiBody({type: GatherCraftDto})
   @ApiResponse({status: 201, type: GatherCraft})

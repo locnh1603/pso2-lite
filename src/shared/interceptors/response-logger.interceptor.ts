@@ -1,8 +1,7 @@
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler, RequestTimeoutException } from '@nestjs/common';
-import { Observable, of, TimeoutError, throwError, EMPTY } from 'rxjs';
-import { tap, catchError, timeout } from 'rxjs/operators';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { logger } from 'src/shared/helpers/logger';
-import { off } from 'process';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {

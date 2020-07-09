@@ -5,6 +5,7 @@ import { ApiResponse, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
+import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
 
 @Controller('gather-resources')
 export class GatherResourceController {
@@ -16,7 +17,7 @@ export class GatherResourceController {
     return this.gatherResourceService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RequestValidatorGuard)
   @Post()
   @ApiBody({type: GatherResourceDto})
   @ApiResponse({status: 201, type: GatherResource})
