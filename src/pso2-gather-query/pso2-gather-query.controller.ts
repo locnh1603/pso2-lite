@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { GatherQueryService } from 'src/pso2-gather-query/pso2-gather-query.service';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { GatherResourceQueryDto, GatherResourceQueryResult, GatherCuisineQueryDto, GatherCuisineQueryResult } from 'src/shared/dto/gather-query-dto.model';
+import { GatherResourceQueryDto, GatherResourceQueryResult, GatherCuisineQueryDto, GatherCuisineQueryResult, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult } from 'src/shared/dto/gather-query-dto.model';
 
 @Controller('gather-query')
 export class GatherQueryController {
@@ -20,5 +20,12 @@ export class GatherQueryController {
   @ApiResponse({status: 201, type: GatherCuisineQueryResult})
   queryCuisine(@Body() queryDto: GatherCuisineQueryDto) {
     return this.queryService.queryCuisine(queryDto);
+  }
+
+  @Post('type')
+  @ApiBody({type: GatherResourceTypeQueryDto})
+  @ApiResponse({status: 201, type: GatherResourceTypeQueryResult})
+  queryType(@Body() queryDto: GatherResourceTypeQueryDto) {
+    return this.queryService.queryType(queryDto);
   }
 }

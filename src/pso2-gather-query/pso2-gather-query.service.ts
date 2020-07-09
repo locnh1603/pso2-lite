@@ -5,8 +5,9 @@ import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { Model } from 'mongoose';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
-import { GatherResourceQueryDto, GatherCuisineQueryDto } from 'src/shared/dto/gather-query-dto.model';
+import { GatherResourceQueryDto, GatherCuisineQueryDto, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult } from 'src/shared/dto/gather-query-dto.model';
 import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
+import { GatherCraftDto } from 'src/shared/dto/gather-craft-dto.model';
 
 @Injectable()
 export class GatherQueryService {
@@ -88,6 +89,20 @@ export class GatherQueryService {
         };
       }
     )
+  }
+
+  queryType(queryDto: GatherResourceTypeQueryDto): Promise<GatherResourceTypeQueryResult> {
+    return Promise.all([
+      this.resourceModel.find(queryDto),
+      this.cuisineModel.find({
+        "$or": [{"buff.class.size" : queryDto.class.size}, {"buff.class.category" : queryDto.class.category}]
+      })
+    ]).then(([resources, cuisines]) => {
+      return {
+        resources,
+        cuisinesFor: cuisines
+      } as GatherResourceTypeQueryResult
+    })
   }
 
   queryCuisine(queryDto: GatherCuisineQueryDto) {
