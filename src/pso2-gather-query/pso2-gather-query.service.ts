@@ -5,7 +5,7 @@ import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { Model } from 'mongoose';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
-import { GatherResourceQueryDto, GatherCuisineQueryDto, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult } from 'src/shared/dto/gather-query-dto.model';
+import { GatherResourceQueryDto, GatherCuisineQueryDto, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult, GatherCraftQueryDto, GatherCraftQueryResult } from 'src/shared/dto/gather-query-dto.model';
 import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
 import { GatherCraftDto } from 'src/shared/dto/gather-craft-dto.model';
 
@@ -22,7 +22,7 @@ export class GatherQueryService {
   ) {}
 
   queryResource(queryDto: GatherResourceQueryDto) {
-    return this.resourceModel.find(queryDto).exec().then(
+    return this.resourceModel.find(queryDto).then(
       (resources: mongoose.Document[]) => {
         const categories = [];
         const sizes = [];
@@ -92,21 +92,33 @@ export class GatherQueryService {
   }
 
   queryType(queryDto: GatherResourceTypeQueryDto): Promise<GatherResourceTypeQueryResult> {
+    const cuisineQuery = [];
+    const resourceQuery = [];
+    Object.keys(queryDto.class).forEach(key => {
+      const cQuery = {};
+      const rQuery = {};
+      cQuery[`buff.class.${key}`] = queryDto.class[key];
+      rQuery[`class.${key}`] = queryDto.class[key];
+      cuisineQuery.push(cQuery);
+      resourceQuery.push(rQuery);
+    });
     return Promise.all([
-      this.resourceModel.find(queryDto),
+      this.resourceModel.find({
+        "$or": resourceQuery
+      }),
       this.cuisineModel.find({
-        "$or": [{"buff.class.size" : queryDto.class.size}, {"buff.class.category" : queryDto.class.category}]
+        "$or": cuisineQuery
       })
-    ]).then(([resources, cuisines]) => {
+    ]).then(([resources, cuisinesFor]) => {
       return {
         resources,
-        cuisinesFor: cuisines
+        cuisinesFor
       } as GatherResourceTypeQueryResult
     })
   }
 
   queryCuisine(queryDto: GatherCuisineQueryDto) {
-    return this.cuisineModel.find(queryDto).exec().then(
+    return this.cuisineModel.find(queryDto).then(
       (cuisines: mongoose.Document[]) => {
         const ingredients = [];
         const categories = [];
@@ -173,5 +185,38 @@ export class GatherQueryService {
           }
         }
       )
+  }
+
+  queryCraft(queryDto: GatherCraftQueryDto): Promise<GatherCraftQueryResult> {
+    return this.craftModel.findOne(queryDto).then(
+      (craft: GatherCraft) => {
+        const ingredients = [];
+        const recipeQuery = [];
+
+        craft.recipe.forEach(
+          ing => {
+            if(!ingredients.find(c => c === ing.resource)) {
+              ingredients.push(ing.resource);
+            }
+          }
+        )
+        ingredients.forEach(i => {
+          recipeQuery.push({
+            name: i
+          })
+        })
+        return Promise.all([
+          this.resourceModel.find({
+            $or: recipeQuery
+          }),
+          craft
+        ])
+      }
+    ).then(([resources, craft]) => {
+      return {
+        craft,
+        inRecipe: resources
+      }
+    })
   }
 }
