@@ -22,6 +22,6 @@ export class RequestValidatorGuard implements CanActivate {
 
   validateTypeRequest(request: Request): boolean {
     const body = JSON.parse(JSON.stringify(request.body));
-    return (Object.keys(body.class).includes('category') && !!body.class.category) && (Object.keys(body.class).includes('size') && !!body.class.size);
+    return (Object.keys(body.class).includes('category') && !!body.class.category) || (Object.keys(body.class).includes('size') && !!body.class.size);
   }
 }

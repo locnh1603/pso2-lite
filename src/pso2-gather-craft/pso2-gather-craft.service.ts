@@ -15,6 +15,11 @@ export class GatherCraftService {
 
   create(newCraft: GatherCraftDto): Promise<GatherCraft> {
     newCraft.name = newCraft.name.toLowerCase();
+    newCraft.recipe = newCraft.recipe.map(i => {
+      const newIng = i;
+      newIng.resource = newIng.resource.toLowerCase();
+      return newIng;
+    })
     const document = new this.craftModel(newCraft);
     return document.save()
   }
