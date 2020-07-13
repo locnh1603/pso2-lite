@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { logger } from './shared/helpers/logger';
+import { systemLogger } from './shared/helpers/logger';
 import { LoggingInterceptor } from 'src/shared/interceptors/response-logger.interceptor';
 import { HttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
 
@@ -22,7 +22,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   await app.listen(3000).then(
     ()=> {
-      logger.info('App started, listening on port 3000')
+      systemLogger.info('App started, listening on port 3000')
     }
   );
 }
