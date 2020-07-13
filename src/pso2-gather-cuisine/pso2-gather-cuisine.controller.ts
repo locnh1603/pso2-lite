@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 import { Controller, Get, Post, Body, UseGuards, Param, Delete } from '@nestjs/common';
 import { GatherCuisineService } from 'src/pso2-gather-cuisine/pso2-gather-cuisine.service';
 import { ApiBody, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/pso2-admin-auth/guard/auth.guard';
 import { GatherCuisineDto } from 'src/shared/dto/gather-cuisine-dto.model';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
@@ -24,7 +23,7 @@ export class GatherCuisineController {
     return this.gatherCuisineService.findOne(name);
   }
   
-  @UseGuards(JwtAuthGuard, RequestValidatorGuard, RequestRecipeGuard)
+  @UseGuards(RequestValidatorGuard, RequestRecipeGuard)
   @Post()
   @ApiBody({type: GatherCuisineDto})
   @ApiResponse({status: 201, type: GatherCuisine})
@@ -32,7 +31,6 @@ export class GatherCuisineController {
     return this.gatherCuisineService.create(cuisine);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':name')
   @ApiResponse({status: 201, type: GatherCuisine})
   delete(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherCuisine> {
