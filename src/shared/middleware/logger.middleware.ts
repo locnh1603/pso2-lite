@@ -5,7 +5,9 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function) {
     mainLogger.info(`request ${req.method} ${req.url}`);
-    mainLogger.info(`\r\n${JSON.stringify(req.body, null, 2)}`);
+    if (req.method!== 'GET') {
+      mainLogger.info(`\r\n${JSON.stringify(req.body, null, 2)}`);
+    }
     next();
   }
 }

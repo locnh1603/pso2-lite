@@ -12,19 +12,19 @@ export class LoggingInterceptor implements NestInterceptor {
     return next
       .handle()
       .pipe(
-        tap(() => {
+        tap((data) => {
           if (request.url.split('/').includes('admin-auth') || request.url.split('/').includes('admin-user')) {
             this.logAdmin(now);
           }
           else {
-            this.logMain(now);
+            this.logMain(now, data);
           }
         })
       )
   }
 
-  logMain(now: number) {
-    mainLogger.info(`request success, return response after ${Date.now() - now}ms`);
+  logMain(now: number, data: any[]) {
+    mainLogger.info(`request success, return ${data.length || 1} record(s) after ${Date.now() - now}ms`);
   }
 
   logAdmin(now: number) {
