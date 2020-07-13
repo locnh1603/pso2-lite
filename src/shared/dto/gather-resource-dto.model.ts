@@ -2,7 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
 import { GatheringResourceTypeEnums } from "src/shared/enum/gather-resource.enum";
 
-export class GatherResourceDto {
+export class GatherResourceDto                                                                                                                                                                                                                                                                                                        
+{
   @ApiProperty()
   id: string;
   @ApiProperty()

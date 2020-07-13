@@ -11,7 +11,6 @@ export class GatherCuisineService {
   constructor(@InjectModel(ModuleNameEnums.gather_cuisine) private resourceModel: Model<GatherCuisine>) {}
 
   create(cuisine: GatherCuisineDto): Promise<GatherCuisine> {
-    cuisine.name = cuisine.name.toLowerCase();
     cuisine.recipe = cuisine.recipe.map(i => {
       const newIng = i;
       newIng.resource = newIng.resource.toLowerCase();
@@ -21,7 +20,19 @@ export class GatherCuisineService {
     return document.save()
   }
 
+  update(cuisine: GatherCuisine): Promise<GatherCuisine> {
+    return this.resourceModel.findOneAndUpdate({name: cuisine.name}, cuisine).then();
+  }
+
+  delete(name: string): Promise<GatherCuisine> {
+    return this.resourceModel.findOneAndDelete({name}).then(res=>res);
+  }
+
   findAll(): Promise<GatherCuisine[]> {
-    return this.resourceModel.find({}).exec();
+    return this.resourceModel.find({}).then(res=>res);
+  }
+
+  findOne(name: string): Promise<GatherCuisine> {
+    return this.resourceModel.findOne({name}).then(res=> res);
   }
 }
