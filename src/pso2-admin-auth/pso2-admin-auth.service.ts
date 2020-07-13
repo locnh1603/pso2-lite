@@ -9,7 +9,7 @@ import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService, @InjectModel(ModuleNameEnums.admin_user) private userModel: Model<User>) {
+  constructor(@InjectModel(ModuleNameEnums.admin_user) private userModel: Model<User>) {
     
   }
 
@@ -27,12 +27,5 @@ export class AuthService {
       }
     );
     return user;
-  }
-
-  async login(user: UserDto) {
-    const payload = { username: user.username, password: user.password };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
   }
 }
