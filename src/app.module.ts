@@ -22,9 +22,7 @@ import { Pso2AdminAuthController } from 'src/pso2-admin-auth/pso2-admin-auth.con
   imports: [
     GatherResourceModule, 
     GatherQueryModule, 
-    GatherCuisineModule, 
-    Pso2AdminUserModule, 
-    Pso2AdminAuthModule,
+    GatherCuisineModule,
     GatherCraftModule,
     ConfigModule.forRoot({
       isGlobal: true
@@ -48,10 +46,5 @@ export class AppModule {
         GatherQueryController,
         GatherCraftController
       )
-      .apply(AuthLoggerMiddleware)
-      .forRoutes(
-        AdminUserController,
-        Pso2AdminAuthController
-      );
   }
 }
