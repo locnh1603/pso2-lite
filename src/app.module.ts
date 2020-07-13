@@ -14,6 +14,8 @@ import { GatherCraftController } from 'src/pso2-gather-craft/pso2-gather-craft.c
 import { GatherCraftModule } from 'src/pso2-gather-craft/pso2-gather-craft.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
+import { RequestDataNameTransformPipe } from 'src/shared/pipes/request-name-data-transform.pipe';
+import { RequestRecipeGuard } from 'src/shared/guards/request-recipe.guard';
 
 @Module({
   imports: [
@@ -29,7 +31,10 @@ import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard
     MongooseModule.forRoot(process.env.DB_URL),
   ],
   providers: [
-    RequestValidatorGuard
+    RequestValidatorGuard,
+    RequestRecipeGuard,
+    RequestDataNameTransformPipe,
+    RequestDataNameTransformPipe
   ]
 })
 export class AppModule {
