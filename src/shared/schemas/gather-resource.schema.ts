@@ -2,13 +2,10 @@ import { Schema, Prop, SchemaFactory, raw } from "@nestjs/mongoose";
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
+import { GatherResourceDto } from "src/shared/dto/gather-resource-dto.model";
 
 @Schema()
 export class GatherResource extends Document {
-  @Prop()
-  @ApiProperty()
-  id: string;
-
   @Prop()
   @ApiProperty()
   name: string;
@@ -38,6 +35,17 @@ export class GatherResource extends Document {
   @Prop()
   @ApiProperty()
   type: string;
+
+  static from(dto: GatherResourceDto): GatherResource {
+    const newRes = new GatherResource();
+    newRes.name = dto.name;
+    newRes.location = dto.location;
+    newRes.region = dto.region;
+    newRes.rarity = dto.rarity;
+    newRes.type = dto.type;
+    newRes.class = dto.class;
+    return newRes;
+  }
 }
 
 export const GatherResourceSchema = SchemaFactory.createForClass(GatherResource);

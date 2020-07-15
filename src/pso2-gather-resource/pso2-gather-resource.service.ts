@@ -18,6 +18,14 @@ export class GatherResourceService {
   }
 
   findAll(): Promise<GatherResource[]> {
-    return this.resourceModel.find({}).exec();
+    return this.resourceModel.find({}).then();
+  }
+
+  delete(name: string): Promise<GatherResource> {
+    return this.resourceModel.findOneAndDelete({name}).then();
+  }
+
+  update(newResource: GatherResourceDto): Promise<GatherResource> {
+    return this.resourceModel.findOneAndUpdate({name : newResource.name}, newResource).then();
   }
 }
