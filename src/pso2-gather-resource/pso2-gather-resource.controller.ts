@@ -35,6 +35,6 @@ export class GatherResourceController {
   @Put(':name')
   @ApiResponse({status: 201, type: GatherResource})
   update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {
-    return this.gatherResourceService.update(resource);
+    return this.gatherResourceService.update(name, resource);
   }
 }

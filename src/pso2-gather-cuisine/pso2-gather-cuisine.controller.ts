@@ -41,6 +41,6 @@ export class GatherCuisineController {
   @Put(':name')
   @ApiResponse({status: 201, type: GatherCuisine})
   update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) cuisine: GatherCuisineDto): Promise<GatherCuisine> {
-    return this.gatherCuisineService.update(cuisine);
+    return this.gatherCuisineService.update(name, cuisine);
   }
 }

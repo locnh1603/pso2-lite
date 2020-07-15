@@ -25,7 +25,7 @@ export class GatherResourceService {
     return this.resourceModel.findOneAndDelete({name}).then();
   }
 
-  update(newResource: GatherResourceDto): Promise<GatherResource> {
-    return this.resourceModel.findOneAndUpdate({name : newResource.name}, newResource).then();
+  update(name: string, newResource: GatherResourceDto): Promise<GatherResource> {
+    return this.resourceModel.findOneAndUpdate({name}, newResource).then();
   }
 }
