@@ -31,6 +31,7 @@ export class GatherResourceController {
     return this.gatherResourceService.delete(name);
   }
 
+  @UseGuards(RequestValidatorGuard)
   @Put(':name')
   @ApiResponse({status: 201, type: GatherResource})
   update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {

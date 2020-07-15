@@ -21,8 +21,6 @@ export class GatherCuisineBuff {
 
 export class GatherCuisineDto {
   @ApiProperty()
-  id: string;
-  @ApiProperty()
   name: string;
   @ApiProperty()
   type: string;

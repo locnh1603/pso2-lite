@@ -20,7 +20,7 @@ export class GatherCuisineService {
     return document.save()
   }
 
-  update(cuisine: GatherCuisine): Promise<GatherCuisine> {
+  update(cuisine: GatherCuisineDto): Promise<GatherCuisine> {
     return this.resourceModel.findOneAndUpdate({name: cuisine.name}, cuisine).then();
   }
 
