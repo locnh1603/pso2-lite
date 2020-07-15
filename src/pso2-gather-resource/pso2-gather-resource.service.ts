@@ -7,8 +7,6 @@ import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
 
 @Injectable()
 export class GatherResourceService {
-  // private readonly GatherResourceModel = mongoose.model('pso2-gather-lite.resources', GatherResouceSchema)
-
   constructor(@InjectModel(ModuleNameEnums.gather_resource) private resourceModel: Model<GatherResource>) {}
 
   create(resource: GatherResourceDto): Promise<GatherResource> {
@@ -18,6 +16,14 @@ export class GatherResourceService {
   }
 
   findAll(): Promise<GatherResource[]> {
-    return this.resourceModel.find({}).exec();
+    return this.resourceModel.find({}).then();
+  }
+
+  delete(name: string): Promise<GatherResource> {
+    return this.resourceModel.findOneAndDelete({name}).then();
+  }
+
+  update(name: string, newResource: GatherResourceDto): Promise<GatherResource> {
+    return this.resourceModel.findOneAndUpdate({name}, newResource).then();
   }
 }

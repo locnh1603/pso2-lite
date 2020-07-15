@@ -5,11 +5,9 @@ import { GatheringResourceTypeEnums } from "src/shared/enum/gather-resource.enum
 export class GatherResourceDto                                                                                                                                                                                                                                                                                                        
 {
   @ApiProperty()
-  id: string;
-  @ApiProperty()
   name: string;
   @ApiProperty()
-  region: string;
+  region: string[];
   @ApiProperty()
   location: string[];
   @ApiProperty({

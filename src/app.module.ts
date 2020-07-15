@@ -23,7 +23,9 @@ import { RequestRecipeGuard } from 'src/shared/guards/request-recipe.guard';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    MongooseModule.forRoot(process.env.DB_URL),
+    MongooseModule.forRoot(process.env.DB_URL, {
+      useFindAndModify: false
+    }),
   ],
   providers: [
     RequestValidatorGuard,

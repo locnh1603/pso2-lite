@@ -8,10 +8,6 @@ import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 export class GatherCuisine extends Document {
   @Prop()
   @ApiProperty()
-  id: string;
-
-  @Prop()
-  @ApiProperty()
   name: string;
 
   @Prop()
@@ -28,25 +24,14 @@ export class GatherCuisine extends Document {
     fishingRate: { type: Number }
   }))
   @ApiProperty({type: GatherCuisineBuff})
-  buff: {
-    class: {
-      category: string;
-      size: string;
-      value: Number
-    };
-    collectRate: Number;
-    fishingRate: Number
-  };
+  buff: GatherCuisineBuff;
 
   @Prop([raw({
     resource: { type: String },
     amount: { type: Number }
   })])
-  @ApiProperty({type: CraftRecipe})
-  recipe: [{
-    resource: string;
-    amount: Number
-  }]
+  @ApiProperty({type: [CraftRecipe]})
+  recipe: CraftRecipe[]
 }
 
 export const GatherCuisineSchema = SchemaFactory.createForClass(GatherCuisine)

@@ -23,4 +23,12 @@ export class GatherCraftService {
     const document = new this.craftModel(newCraft);
     return document.save()
   }
+
+  delete(name: string): Promise<GatherCraft> {
+    return this.craftModel.findOneAndDelete({name}).then();
+  }
+
+  update(name: string, craft: GatherCraftDto) {
+    return this.craftModel.findOneAndUpdate({name}, craft).then();
+  }
 }

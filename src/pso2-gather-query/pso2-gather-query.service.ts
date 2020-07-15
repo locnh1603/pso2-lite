@@ -7,7 +7,6 @@ import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 import { GatherResourceQueryDto, GatherCuisineQueryDto, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult, GatherCraftQueryDto, GatherCraftQueryResult } from 'src/shared/dto/gather-query-dto.model';
 import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
-import { GatherCraftDto } from 'src/shared/dto/gather-craft-dto.model';
 
 @Injectable()
 export class GatherQueryService {
