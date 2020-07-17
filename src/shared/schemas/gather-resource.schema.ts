@@ -12,7 +12,7 @@ export class GatherResource extends Document {
 
   @Prop()
   @ApiProperty()
-  url: string;
+  icon: string;
 
   @Prop([String])
   @ApiProperty({type: [String]})
@@ -46,7 +46,7 @@ export class GatherResource extends Document {
     newRes.location = dto.location;
     newRes.region = dto.region;
     newRes.rarity = dto.rarity;
-    newRes.url = dto.url;
+    newRes.icon = dto.icon;
     newRes.type = dto.type;
     newRes.class = dto.class;
     return newRes;

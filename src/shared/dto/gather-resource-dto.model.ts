@@ -7,7 +7,7 @@ export class GatherResourceDto
   @ApiProperty()
   name: string;
   @ApiProperty()
-  url: string;
+  icon: string;
   @ApiProperty()
   region: string[];
   @ApiProperty()
