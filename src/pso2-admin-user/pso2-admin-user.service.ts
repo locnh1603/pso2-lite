@@ -19,6 +19,6 @@ export class Pso2AdminUserService {
   async changePwd(newUserInfo: User): Promise<mongoose.Document> {
     const username = newUserInfo.username;
     const password = crypto.SHA256(newUserInfo.password.toString()).toString(crypto.enc.Hex);
-    return this.userModel.findOneAndUpdate({username}, {password});
+    return this.userModel.findOneAndUpdate({username}, {password}, {new: true});
   }
 }

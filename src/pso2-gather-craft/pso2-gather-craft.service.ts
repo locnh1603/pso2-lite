@@ -29,6 +29,6 @@ export class GatherCraftService {
   }
 
   update(name: string, craft: GatherCraftDto) {
-    return this.craftModel.findOneAndUpdate({name}, craft).then();
+    return this.craftModel.findOneAndUpdate({name}, craft, {new: true}).then();
   }
 }

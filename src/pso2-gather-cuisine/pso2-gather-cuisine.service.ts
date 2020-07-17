@@ -21,7 +21,7 @@ export class GatherCuisineService {
   }
 
   update(name, cuisine: GatherCuisineDto): Promise<GatherCuisine> {
-    return this.resourceModel.findOneAndUpdate({name}, cuisine).then();
+    return this.resourceModel.findOneAndUpdate({name}, cuisine, {new: true}).then();
   }
 
   delete(name: string): Promise<GatherCuisine> {
