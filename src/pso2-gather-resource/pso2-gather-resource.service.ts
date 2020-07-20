@@ -4,6 +4,8 @@ import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { Model } from 'mongoose';
 import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
+import { v4 } from 'uuid';
+import { forkJoin, of } from 'rxjs';
 
 @Injectable()
 export class GatherResourceService {
@@ -19,11 +21,11 @@ export class GatherResourceService {
     return this.resourceModel.find({}).then();
   }
 
-  delete(name: string): Promise<GatherResource> {
-    return this.resourceModel.findOneAndDelete({name}).then();
+  delete(id: string): Promise<GatherResource> {
+    return this.resourceModel.findOneAndDelete({id}).then();
   }
 
-  update(name: string, newResource: GatherResourceDto): Promise<GatherResource> {
-    return this.resourceModel.findOneAndUpdate({name}, newResource, {new: true}).then();
+  update(id: string, newResource: GatherResourceDto): Promise<GatherResource> {
+    return this.resourceModel.findOneAndUpdate({id}, newResource, {new: true}).then();
   }
 }

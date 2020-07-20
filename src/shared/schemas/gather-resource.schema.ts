@@ -3,9 +3,16 @@ import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
 import { GatherResourceDto } from "src/shared/dto/gather-resource-dto.model";
+import { v4 } from 'uuid'
 
 @Schema()
 export class GatherResource extends Document {
+  @Prop()
+  @ApiProperty({
+    type: String
+  })
+  id: string;
+
   @Prop()
   @ApiProperty()
   name: string;

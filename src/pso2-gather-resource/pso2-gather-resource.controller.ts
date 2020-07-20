@@ -6,6 +6,7 @@ import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
 import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
 import { RequestParamNameTransformPipe, RequestDataNameTransformPipe } from 'src/shared/pipes/request-name-data-transform.pipe';
+import { v4 } from 'uuid';
 
 @Controller('gather-resources')
 export class GatherResourceController {
@@ -22,19 +23,20 @@ export class GatherResourceController {
   @ApiBody({type: GatherResourceDto})
   @ApiResponse({status: 201, type: GatherResource})
   create(@Body() gatheringResource: GatherResourceDto): Promise<GatherResource> {
+    gatheringResource.id = (v4().toString());
     return this.gatherResourceService.create(gatheringResource);
   }
 
-  @Delete(':name')
+  @Delete(':id')
   @ApiResponse({status: 201, type: GatherResource})
-  delete(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherResource> {
-    return this.gatherResourceService.delete(name);
+  delete(@Param() id: string): Promise<GatherResource> {
+    return this.gatherResourceService.delete(id);
   }
 
   @UseGuards(RequestValidatorGuard)
-  @Put(':name')
+  @Put(':id')
   @ApiResponse({status: 201, type: GatherResource})
-  update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {
-    return this.gatherResourceService.update(name, resource);
+  update(@Param() id: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {
+    return this.gatherResourceService.update(id, resource);
   }
 }
