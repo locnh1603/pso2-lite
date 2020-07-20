@@ -29,14 +29,14 @@ export class GatherResourceController {
 
   @Delete(':id')
   @ApiResponse({status: 201, type: GatherResource})
-  delete(@Param() id: string): Promise<GatherResource> {
+  delete(@Param('id') id: string): Promise<GatherResource> {
     return this.gatherResourceService.delete(id);
   }
 
   @UseGuards(RequestValidatorGuard)
   @Put(':id')
   @ApiResponse({status: 201, type: GatherResource})
-  update(@Param() id: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {
+  update(@Param('id') id: string, @Body(new RequestDataNameTransformPipe()) resource: GatherResourceDto): Promise<GatherResource> {
     return this.gatherResourceService.update(id, resource);
   }
 }
