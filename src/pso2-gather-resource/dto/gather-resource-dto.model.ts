@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
-import { GatheringResourceTypeEnums } from "src/shared/enum/gather-resource.enum";
+import { GatheringResourceTypeEnums, GatheringResourceCategoryEnums, GatheringResourceSizeEnums } from "src/shared/enum/gather-resource.enum";
 import { v4 } from 'uuid'
 
 export class GatherResourceDto                                                                                                                                                                                                                                                                                                        
@@ -24,7 +24,7 @@ export class GatherResourceDto
   @ApiProperty({
     type: [String]
   })
-  location: string[];
+  locations: string[];
   @ApiProperty({
     type: GatherResourceClass
   })
@@ -35,4 +35,18 @@ export class GatherResourceDto
   rarity: number;
   @ApiProperty({enum: GatheringResourceTypeEnums})
   type: GatheringResourceTypeEnums
+
+  constructor() {
+    this.id = '';
+    this.name ='';
+    this.class = {
+      category: GatheringResourceCategoryEnums.Other,
+      size: GatheringResourceSizeEnums.Small
+    };
+    this.icon = '';
+    this.locations = [];
+    this.region = [];
+    this.rarity = 0;
+    this.type = GatheringResourceTypeEnums.Fishing
+  }
 }

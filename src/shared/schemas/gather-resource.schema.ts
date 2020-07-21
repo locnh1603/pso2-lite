@@ -2,7 +2,7 @@ import { Schema, Prop, SchemaFactory, raw } from "@nestjs/mongoose";
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherResourceClass } from "src/shared/dto/gather-resource-class.interface";
-import { GatherResourceDto } from "src/shared/dto/gather-resource-dto.model";
+import { GatherResourceDto } from "src/pso2-gather-resource/dto/gather-resource-dto.model";
 import { v4 } from 'uuid'
 
 @Schema()
@@ -50,7 +50,7 @@ export class GatherResource extends Document {
   static from(dto: GatherResourceDto): GatherResource {
     const newRes = new GatherResource();
     newRes.name = dto.name;
-    newRes.location = dto.location;
+    newRes.location = dto.locations;
     newRes.region = dto.region;
     newRes.rarity = dto.rarity;
     newRes.icon = dto.icon;

@@ -3,7 +3,7 @@ import { Controller, Get, Post, Body, UseGuards, Delete, Param, Put } from '@nes
 import { GatherResourceService } from 'src/pso2-gather-resource/pso2-gather-resource.service';
 import { ApiResponse, ApiBody } from '@nestjs/swagger';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
-import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
+import { GatherResourceDto } from 'src/pso2-gather-resource/dto/gather-resource-dto.model';
 import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
 import { RequestParamNameTransformPipe, RequestDataNameTransformPipe } from 'src/shared/pipes/request-name-data-transform.pipe';
 import { v4 } from 'uuid';

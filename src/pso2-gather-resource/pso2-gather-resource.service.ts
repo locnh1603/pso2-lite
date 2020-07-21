@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ModuleNameEnums } from 'src/shared/enum/module_name.enum';
 import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 import { Model } from 'mongoose';
-import { GatherResourceDto } from 'src/shared/dto/gather-resource-dto.model';
+import { GatherResourceDto } from 'src/pso2-gather-resource/dto/gather-resource-dto.model';
 import { v4 } from 'uuid';
 import { forkJoin, of } from 'rxjs';
 
