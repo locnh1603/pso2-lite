@@ -11,11 +11,3 @@ export class LoggerMiddleware implements NestMiddleware {
     next();
   }
 }
-
-@Injectable()
-export class AuthLoggerMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: Function) {
-    adminLogger.info(`request ${req.method} ${req.url}`);
-    next();
-  }
-}
