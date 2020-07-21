@@ -1,3 +1,3 @@
 export const environments = {
-  mongodb_uri: 'mongodb+srv://rw_user:rw_user@cluster0.rqq8l.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority'
+  mongodb_uri: 'mongodb+srv://rw_user:rw_user@cluster0.rqq8l.gcp.mongodb.net/pso2-gather-lite?retryWrites=true&w=majority'
 }
