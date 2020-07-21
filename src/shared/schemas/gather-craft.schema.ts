@@ -2,8 +2,8 @@ import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose";
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger";
 import { PSO2ClassEnums } from "src/shared/enum/gather-resource.enum";
-import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 import { GatherCraftTypeEnums } from "src/shared/enum/pso2-lite.enum";
+import { CraftRecipe } from "src/shared/models/craft-recipe.model";
 
 @Schema()
 export class GatherCraft extends Document {

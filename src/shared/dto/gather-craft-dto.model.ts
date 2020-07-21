@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { GatherCraftTypeEnums } from "src/shared/enum/pso2-lite.enum";
-import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 import { PSO2ClassEnums } from "src/shared/enum/gather-resource.enum";
+import { CraftRecipe } from "src/shared/models/craft-recipe.model";
 
 export class GatherCraftDto {
   @ApiProperty()

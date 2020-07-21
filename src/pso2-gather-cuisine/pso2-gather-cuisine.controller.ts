@@ -10,37 +10,37 @@ import { RequestRecipeGuard } from 'src/shared/guards/request-recipe.guard';
 
 @Controller('gather-cuisines')
 export class GatherCuisineController {
-  constructor(private gatherCuisineService: GatherCuisineService) {}
-  @Get()
-  @ApiResponse({status: 201, type: [GatherCuisine]})
-  findAll(): Promise<GatherCuisine[]> {
-    return this.gatherCuisineService.findAll();
-  }
+  // constructor(private gatherCuisineService: GatherCuisineService) {}
+  // @Get()
+  // @ApiResponse({status: 201, type: [GatherCuisine]})
+  // findAll(): Promise<GatherCuisine[]> {
+  //   return this.gatherCuisineService.findAll();
+  // }
 
-  @Get(':name')
-  @ApiResponse({status: 201, type: GatherCuisine})
-  findOne(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherCuisine> {
-    return this.gatherCuisineService.findOne(name);
-  }
+  // @Get(':name')
+  // @ApiResponse({status: 201, type: GatherCuisine})
+  // findOne(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherCuisine> {
+  //   return this.gatherCuisineService.findOne(name);
+  // }
   
-  @UseGuards(RequestValidatorGuard, RequestRecipeGuard)
-  @Post()
-  @ApiBody({type: GatherCuisineDto})
-  @ApiResponse({status: 201, type: GatherCuisine})
-  create(@Body(new RequestDataNameTransformPipe()) cuisine: GatherCuisineDto): Promise<GatherCuisine> {
-    return this.gatherCuisineService.create(cuisine);
-  }
+  // @UseGuards(RequestValidatorGuard, RequestRecipeGuard)
+  // @Post()
+  // @ApiBody({type: GatherCuisineDto})
+  // @ApiResponse({status: 201, type: GatherCuisine})
+  // create(@Body(new RequestDataNameTransformPipe()) cuisine: GatherCuisineDto): Promise<GatherCuisine> {
+  //   return this.gatherCuisineService.create(cuisine);
+  // }
 
-  @Delete(':name')
-  @ApiResponse({status: 201, type: GatherCuisine})
-  delete(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherCuisine> {
-    return this.gatherCuisineService.delete(name);
-  }
+  // @Delete(':name')
+  // @ApiResponse({status: 201, type: GatherCuisine})
+  // delete(@Param('name', new RequestParamNameTransformPipe()) name: string): Promise<GatherCuisine> {
+  //   return this.gatherCuisineService.delete(name);
+  // }
 
-  @UseGuards(RequestValidatorGuard)
-  @Put(':name')
-  @ApiResponse({status: 201, type: GatherCuisine})
-  update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) cuisine: GatherCuisineDto): Promise<GatherCuisine> {
-    return this.gatherCuisineService.update(name, cuisine);
-  }
+  // @UseGuards(RequestValidatorGuard)
+  // @Put(':name')
+  // @ApiResponse({status: 201, type: GatherCuisine})
+  // update(@Param('name', new RequestParamNameTransformPipe()) name: string, @Body(new RequestDataNameTransformPipe()) cuisine: GatherCuisineDto): Promise<GatherCuisine> {
+  //   return this.gatherCuisineService.update(name, cuisine);
+  // }
 }

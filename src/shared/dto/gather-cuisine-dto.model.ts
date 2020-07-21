@@ -1,5 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { CraftRecipe } from "src/shared/dto/gather-resource-class.interface";
 
 export class GatherCuisineClassBuff {
   @ApiProperty()
@@ -26,7 +25,5 @@ export class GatherCuisineDto {
   type: string;
   @ApiProperty({type: GatherCuisineBuff})
   buff: GatherCuisineBuff;
-  @ApiProperty({type: [CraftRecipe]})
-  recipe: CraftRecipe[]
 }
 
