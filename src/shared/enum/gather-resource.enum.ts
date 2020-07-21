@@ -36,5 +36,6 @@ export enum PSO2ClassEnums {
   bouncer = 'Bouncer',
   summoner = 'Summoner',
   hero = 'Hero',
-  phantom = 'Phantom'
+  phantom = 'Phantom',
+  other = 'Other'
 }

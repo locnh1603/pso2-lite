@@ -24,7 +24,7 @@ export class LoggingInterceptor implements NestInterceptor {
   }
 
   logMain(now: number, data: any[]) {
-    mainLogger.info(`request success, return ${data.length || 1} record(s) after ${Date.now() - now}ms`);
+    mainLogger.info(`request success, return ${data.length || 0} record(s) after ${Date.now() - now}ms`);
   }
 
   logAdmin(now: number) {
