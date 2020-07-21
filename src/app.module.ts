@@ -17,8 +17,7 @@ import { DatabaseModule } from 'src/@database/mongodb.module';
 
 @Module({
   imports: [
-    GatherResourceModule, 
-    // GatherQueryModule, 
+    GatherResourceModule,
     GatherCuisineModule,
     GatherCraftModule,
     DatabaseModule
@@ -31,14 +30,13 @@ import { DatabaseModule } from 'src/@database/mongodb.module';
   ]
 })
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer
-  //     .apply(LoggerMiddleware)
-  //     .forRoutes(
-  //       GatherCuisineController,
-  //       GatherResourceController,
-  //       GatherQueryController,
-  //       GatherCraftController
-  //     )
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(
+        GatherCuisineController,
+        GatherResourceController,
+        GatherCraftController
+      )
+  }
 }
