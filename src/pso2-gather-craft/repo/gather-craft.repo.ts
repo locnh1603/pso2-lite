@@ -1,4 +1,4 @@
-import { GatherCraftDto } from "src/pso2-gather-craft/dto/gather-Craft-dto.model";
+import { GatherCraftDto } from "src/pso2-gather-craft/dto/gather-craft-dto.model";
 
 export abstract class GatherCraftRepo {
   getAsync(): Promise<GatherCraftDto[]> {
