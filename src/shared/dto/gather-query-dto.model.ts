@@ -1,6 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { GatherCuisine } from "src/shared/schemas/gather-cuisine.schema";
-import { GatherCraft } from "src/shared/schemas/gather-craft.schema";
 import { GatherResourceClass } from "src/pso2-gather-resource/dto/gather-resource-dto.model";
 
 export class GatherResourceQueryDto {

@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CraftRecipe {
-  @ApiProperty()
+  @ApiProperty({type: String})
   resource: string;
-  @ApiProperty()
+  @ApiProperty({type: Number})
   amount: number;
 }
