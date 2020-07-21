@@ -9,7 +9,8 @@ export const GatherCuisineSchema = new mongoose.Schema({
   name: {
     type: String,
     default: '',
-    index: true
+    index: true,
+    required: true
   },
   recipe: {
     type: [{

@@ -4,15 +4,27 @@ import { PSO2ClassEnums } from "src/shared/enum/gather-resource.enum";
 import { CraftRecipe } from "src/shared/models/craft-recipe.model";
 
 export class GatherCraftDto {
-  @ApiProperty()
+
+  @ApiProperty({type: String})
+  id: string;
+
+  @ApiProperty({type: String})
   name: string;
 
-  @ApiProperty({enum: PSO2ClassEnums})
+  @ApiProperty({type: String, enum: PSO2ClassEnums})
   class: PSO2ClassEnums;
 
-  @ApiProperty({enum: GatherCraftTypeEnums})
+  @ApiProperty({type: String, enum: GatherCraftTypeEnums})
   type: GatherCraftTypeEnums;
 
   @ApiProperty({type: [CraftRecipe]})
   recipe: CraftRecipe[];
+
+  constructor() {
+    this.name ='';
+    this.id = '';
+    this.class = PSO2ClassEnums.summoner;
+    this.type = GatherCraftTypeEnums.lring;
+    this.recipe = [];
+  }
 }
