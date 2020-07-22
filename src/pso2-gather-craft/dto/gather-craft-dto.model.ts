@@ -17,7 +17,7 @@ export class GatherCraftDto {
   @ApiProperty({type: String, enum: GatherCraftTypeEnums})
   type: GatherCraftTypeEnums;
 
-  @ApiProperty({type: [CraftRecipe]})
+  @ApiProperty({type: () =>[CraftRecipe]})
   recipe: CraftRecipe[];
 
   constructor() {

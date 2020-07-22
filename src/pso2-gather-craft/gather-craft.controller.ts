@@ -3,7 +3,7 @@ import { GatherCraftService } from 'src/pso2-gather-craft/gather-craft.service';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { GatherCraftDto } from 'src/pso2-gather-craft/dto/gather-craft-dto.model';
 
-@Controller('gather-Crafts')
+@Controller('gather-crafts')
 export class GatherCraftController {
   constructor(private gatherCraftService: GatherCraftService) {}
   @Get()

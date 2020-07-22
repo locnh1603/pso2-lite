@@ -22,7 +22,8 @@ export const GatherCraftSchema = new mongoose.Schema({
   },
   recipe: {
     type: [{
-      resource: String,
+      resourceId: String,
+      resourceName: String,
       amount: Number
     }],
     default: []
