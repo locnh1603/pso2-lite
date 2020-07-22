@@ -10,8 +10,8 @@ async function bootstrap() {
     logger: ['log', 'error', 'warn']
   });
 
-  app.useGlobalInterceptors(new LoggingInterceptor());
-  app.useGlobalFilters(new HttpExceptionFilter());
+  // app.useGlobalInterceptors(new LoggingInterceptor());
+  // app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors();
 
   const options = new DocumentBuilder()

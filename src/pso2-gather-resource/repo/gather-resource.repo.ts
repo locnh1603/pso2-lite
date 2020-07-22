@@ -7,6 +7,9 @@ export abstract class GatherResourceRepo {
   getByIdAsync(id: string): Promise<GatherResourceDto> {
     return null;
   }
+  getByAnyAsync(query: string): Promise<GatherResourceDto[]> {
+    return null;
+  }
   createAsync(entity: GatherResourceDto): Promise<GatherResourceDto> {
     return null;
   }

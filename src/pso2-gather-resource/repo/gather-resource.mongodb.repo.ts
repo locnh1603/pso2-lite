@@ -11,7 +11,14 @@ export class GatherResourceMongoDbRepo implements GatherResourceRepo {
     @Inject(MongoDbEnums.GatherResourceCollection)
     private readonly gatherResDocument: Model<GatherResourceDocument>,
   ) { }
-
+  async getByAnyAsync(query: string): Promise<GatherResourceDto[]> {
+    return this.gatherResDocument.find({
+      $or: [
+        { name: {$regex: query}},
+        { type: {$regex: query}}
+      ]
+    }).then();
+  }
   async getByIdAsync(id: string): Promise<GatherResourceDto> {
     return this.gatherResDocument.findOne({ id }).then();
   }

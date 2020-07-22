@@ -3,7 +3,7 @@ import { GatherResourceClass } from "src/pso2-gather-resource/dto/gather-resourc
 
 export class GatherResourceQueryDto {
   @ApiProperty()
-  name: string;
+  query: string;
 }
 
 export class GatherCuisineQueryDto {

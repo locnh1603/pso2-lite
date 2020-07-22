@@ -6,10 +6,20 @@ import { Model } from 'mongoose';
 // import { GatherResource } from 'src/shared/schemas/gather-resource.schema';
 // import { GatherCuisine } from 'src/shared/schemas/gather-cuisine.schema';
 import { GatherResourceQueryDto, GatherCuisineQueryDto, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult, GatherCraftQueryDto, GatherCraftQueryResult } from 'src/shared/dto/gather-query-dto.model';
+import { QueryBus } from '@nestjs/cqrs';
+import { ResourceQuery } from 'src/pso2-gather-query/query/gather-query.query';
 // import { GatherCraft } from 'src/shared/schemas/gather-craft.schema';
 
 @Injectable()
 export class GatherQueryService {
+
+  constructor(
+    private readonly queryBus: QueryBus,
+  ) {}
+
+  queryResource(query: string) {
+    return this.queryBus.execute(new ResourceQuery(query));
+  }
 
   // constructor(
   //   @InjectModel(ModuleNameEnums.gather_resource) 

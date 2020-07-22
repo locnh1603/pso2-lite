@@ -1,4 +1,8 @@
-export class ResourceQuery {}
+export class ResourceQuery {
+  constructor(
+    public readonly query: string
+  ){}
+}
 
 export class CuisineQuery {}
 

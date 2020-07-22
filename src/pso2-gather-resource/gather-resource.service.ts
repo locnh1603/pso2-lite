@@ -16,6 +16,10 @@ export class GatherResourceService {
     return await this.gatherResourceRepo.getByIdAsync(id);
   }
 
+  async getByAnyAsync(query: string): Promise<GatherResourceDto[]> {
+    return await this.gatherResourceRepo.getByAnyAsync(query);
+  }
+
   async createAsync(entity: GatherResourceDto): Promise<GatherResourceDto> {
     return await this.gatherResourceRepo.createAsync(entity);
   }

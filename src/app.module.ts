@@ -20,6 +20,7 @@ import { DatabaseModule } from 'src/@database/mongodb.module';
     GatherResourceModule,
     GatherCuisineModule,
     GatherCraftModule,
+    GatherQueryModule,
     DatabaseModule
   ],
   providers: [

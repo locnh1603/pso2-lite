@@ -4,19 +4,19 @@ import { GatherQueryService } from 'src/pso2-gather-query/pso2-gather-query.serv
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { GatherResourceQueryDto, GatherResourceQueryResult, GatherCuisineQueryDto, GatherCuisineQueryResult, GatherResourceTypeQueryDto, GatherResourceTypeQueryResult, GatherCraftQueryDto, GatherCraftQueryResult } from 'src/shared/dto/gather-query-dto.model';
 import { RequestValidatorGuard } from 'src/shared/guards/request-validator.guard';
+import { QueryBus } from '@nestjs/cqrs';
+import { ResourceQuery } from 'src/pso2-gather-query/query/gather-query.query';
 
 @Controller('gather-query')
 export class GatherQueryController {
-  // constructor(private queryService: GatherQueryService) {}
+  constructor(private queryService: GatherQueryService, private readonly queryBus: QueryBus) {}
 
-  // @UseGuards(RequestValidatorGuard)
-  // @Post('resource')
-  // @ApiBody({type: GatherResourceQueryDto})
-  // @ApiResponse({status: 201, type: GatherResourceQueryResult})
-  // queryResource(@Body() queryDto: GatherResourceQueryDto) {
-  //   queryDto.name = queryDto.name.toLowerCase();
-  //   return this.queryService.queryResource(queryDto);
-  // }
+  @Post('resource')
+  @ApiBody({type: GatherResourceQueryDto})
+  queryResource(@Body() query: GatherResourceQueryDto) {
+    query.query = query.query.toLowerCase();
+    return this.queryBus.execute(new ResourceQuery(query.query));
+  }
 
   // @UseGuards(RequestValidatorGuard)
   // @Post('cuisine')
