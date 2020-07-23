@@ -7,6 +7,9 @@ export abstract class GatherCuisineRepo {
   getByIdAsync(id: string): Promise<GatherCuisineDto> {
     return null;
   }
+  getByAnyAsync(query: string): Promise<GatherCuisineDto[]> {
+    return null;
+  }
   createAsync(entity: GatherCuisineDto): Promise<GatherCuisineDto> {
     return null;
   }

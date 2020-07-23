@@ -11,7 +11,9 @@ export class GatherCraftMongoDbRepo implements GatherCraftRepo {
     @Inject(MongoDbEnums.GatherCraftsCollection)
     private readonly CraftDocument: Model<GatherCraftDocument>,
   ) { }
-
+  async getByAnyAsync(query: string): Promise<GatherCraftDto[]> {
+    return this.CraftDocument.find({name: query}).then();
+  }
   async getByIdAsync(id: string): Promise<GatherCraftDto> {
     return this.CraftDocument.findOne({ id }).then();
   }

@@ -11,7 +11,9 @@ export class GatherCuisineMongoDbRepo implements GatherCuisineRepo {
     @Inject(MongoDbEnums.GatherCuisinesCollection)
     private readonly cuisineDocument: Model<GatherCuisineDocument>,
   ) { }
-
+  async getByAnyAsync(query: string): Promise<GatherCuisineDto[]> {
+    return this.cuisineDocument.find()
+  }
   async getByIdAsync(id: string): Promise<GatherCuisineDto> {
     return this.cuisineDocument.findOne({ id }).then();
   }

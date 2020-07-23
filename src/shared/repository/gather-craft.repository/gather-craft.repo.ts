@@ -7,6 +7,9 @@ export abstract class GatherCraftRepo {
   getByIdAsync(id: string): Promise<GatherCraftDto> {
     return null;
   }
+  getByAnyAsync(query: string): Promise<GatherCraftDto[]> {
+    return null;
+  }
   createAsync(entity: GatherCraftDto): Promise<GatherCraftDto> {
     return null;
   }
