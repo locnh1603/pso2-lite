@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { GatherCuisineRepo } from 'src/pso2-gather-cuisine/repo/gather-cuisine.repo';
-import { GatherCuisineDto } from 'src/pso2-gather-cuisine/dto/gather-cuisine-dto.model';
+import { GatherCuisineRepo } from 'src/shared/repository/gather-cuisine.repository/gather-cuisine.repo';
+import { GatherCuisineDto } from 'src/shared/models/gather-cuisine-dto.model';
 
 @Injectable()
 export class GatherCuisineService {

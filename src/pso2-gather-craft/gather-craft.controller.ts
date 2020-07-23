@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { GatherCraftService } from 'src/pso2-gather-craft/gather-craft.service';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { GatherCraftDto } from 'src/pso2-gather-craft/dto/gather-craft-dto.model';
+import { GatherCraftDto } from 'src/shared/models/gather-craft-dto.model';
+import JwtAuthenticationGuard from 'src/shared/guards/authentication.guard';
 
 @Controller('gather-crafts')
 export class GatherCraftController {
@@ -18,6 +19,7 @@ export class GatherCraftController {
     return await this.gatherCraftService.getByIdAsync(id);
   }
   
+  
   @Post()
   @ApiBody({type: GatherCraftDto})
   @ApiResponse({status: 201, type: GatherCraftDto})
@@ -31,6 +33,7 @@ export class GatherCraftController {
     return await this.gatherCraftService.deleteAsync(id);
   }
 
+  
   @Put(':id')
   @ApiResponse({status: 201, type: GatherCraftDto})
   async update(@Param('id') id: string, @Body() entity: GatherCraftDto): Promise<GatherCraftDto> {

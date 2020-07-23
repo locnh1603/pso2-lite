@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { GatherCraftRepo } from 'src/pso2-gather-craft/repo/gather-craft.repo';
-import { GatherCraftDto } from 'src/pso2-gather-craft/dto/gather-craft-dto.model';
+import { GatherCraftRepo } from 'src/shared/repository/gather-craft.repository/gather-craft.repo';
+import { GatherCraftDto } from 'src/shared/models/gather-craft-dto.model';
 
 @Injectable()
 export class GatherCraftService {

@@ -1,8 +1,9 @@
 import { Controller, Get, Param, UseGuards, Post, Body, Delete, Patch, Put } from '@nestjs/common';
 import { GatherResourceService } from 'src/pso2-gather-resource/gather-resource.service';
-import { GatherResourceDto } from 'src/pso2-gather-resource/dto/gather-resource-dto.model';
+import { GatherResourceDto } from 'src/shared/models/gather-resource-dto.model';
 import { ApiResponse, ApiBody } from '@nestjs/swagger';
 import { v4 } from 'uuid';
+import JwtAuthenticationGuard from 'src/shared/guards/authentication.guard';
 
 @Controller('gather-resources')
 export class GatherResourceController {
@@ -22,6 +23,7 @@ export class GatherResourceController {
     return await this.gatherResourceService.getByIdAsync(id);
   }
 
+  
   @Post()
   @ApiBody({type: GatherResourceDto})
   @ApiResponse({status: 201, type: GatherResourceDto})
@@ -29,12 +31,14 @@ export class GatherResourceController {
     return this.gatherResourceService.createAsync(entity);
   }
 
+  
   @Delete(':id')
   @ApiResponse({status: 201, type: GatherResourceDto})
   delete(@Param('id') id: string): Promise<GatherResourceDto> {
     return this.gatherResourceService.deleteAsync(id);
   }
 
+  
   @Put(':id')
   @ApiResponse({status: 201, type: GatherResourceDto})
   update(@Param('id') id: string, @Body() entity: GatherResourceDto): Promise<GatherResourceDto> {

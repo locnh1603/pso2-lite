@@ -1,6 +1,6 @@
-import { GatherResourceRepo } from "src/pso2-gather-resource/repo";
+import { GatherResourceRepo } from "src/shared/repository/gather-resources.repository";
 import { Injectable } from "@nestjs/common";
-import { GatherResourceDto } from "src/pso2-gather-resource/dto/gather-resource-dto.model";
+import { GatherResourceDto } from "src/shared/models/gather-resource-dto.model";
 
 @Injectable()
 export class GatherResourceService {
