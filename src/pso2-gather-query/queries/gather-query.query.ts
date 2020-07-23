@@ -4,10 +4,26 @@ export class ResourceQuery {
   ){}
 }
 
-export class CuisineQuery {}
+export class CuisineQuery {
+  constructor(
+    public readonly query: string
+  ){}
+}
 
-export class CraftQuery {}
+export class CraftQuery {
+  constructor(
+    public readonly query: string
+  ){}
+}
 
-export class TypeQuery {}
+export class TypeQuery {
+  constructor(
+    public readonly query: string
+  ){}
+}
 
-export class GeneralQuery {}
+export class GeneralQuery {
+  constructor(
+    public readonly query: string
+  ){}
+}
