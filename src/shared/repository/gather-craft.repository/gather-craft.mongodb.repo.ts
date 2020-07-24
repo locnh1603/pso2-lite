@@ -12,7 +12,20 @@ export class GatherCraftMongoDbRepo implements GatherCraftRepo {
     private readonly CraftDocument: Model<GatherCraftDocument>,
   ) { }
   async getByAnyAsync(query: string): Promise<GatherCraftDto[]> {
-    return this.CraftDocument.find({name: query}).then();
+    return this.CraftDocument.find({
+      $or: [
+        { name: {$regex: query}},
+        { type: {$regex: query}},
+        { class: {$regex: query}},
+        { buff: {
+          $or:[{
+            'class.category': query
+          }, {
+            'class.size': query
+          }]
+        }}
+      ]
+    }).then();
   }
   async getByIdAsync(id: string): Promise<GatherCraftDto> {
     return this.CraftDocument.findOne({ id }).then();

@@ -12,7 +12,14 @@ export class GatherCuisineMongoDbRepo implements GatherCuisineRepo {
     private readonly cuisineDocument: Model<GatherCuisineDocument>,
   ) { }
   async getByAnyAsync(query: string): Promise<GatherCuisineDto[]> {
-    return this.cuisineDocument.find()
+    return this.cuisineDocument.find({
+      $or: [
+        { name: {$regex: query}},
+        { recipe: { $all : [
+          { resource: query }
+        ]}}
+      ]
+    }).then();
   }
   async getByIdAsync(id: string): Promise<GatherCuisineDto> {
     return this.cuisineDocument.findOne({ id }).then();

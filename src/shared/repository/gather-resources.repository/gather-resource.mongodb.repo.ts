@@ -15,7 +15,17 @@ export class GatherResourceMongoDbRepo implements GatherResourceRepo {
     return this.gatherResDocument.find({
       $or: [
         { name: {$regex: query}},
-        { type: {$regex: query}}
+        { type: {$regex: query}},
+        { $or: [
+          { 'class.size': query },
+          { 'class.category': query }
+        ]},
+        {
+          region: { $all: [query] }
+        },
+        {
+          location: { $all: [query] }
+        }
       ]
     }).then();
   }
