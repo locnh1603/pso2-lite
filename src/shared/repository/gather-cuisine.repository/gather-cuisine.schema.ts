@@ -14,7 +14,8 @@ export const GatherCuisineSchema = new mongoose.Schema({
   },
   recipe: {
     type: [{
-      resource: String,
+      resourceName: String,
+      resourceId: String,
       amount: Number
     }],
     default: [],
@@ -27,7 +28,7 @@ export const GatherCuisineSchema = new mongoose.Schema({
         value: Number
       },
       collectRate: Number,
-      fihsingRate: Number
+      fishingRate: Number
     },
     default: {},
     required: true
