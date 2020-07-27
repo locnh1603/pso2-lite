@@ -1,7 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
 import { QueryBus } from '@nestjs/cqrs';
-import { ResourceQuery } from 'src/pso2-gather-query/queries/gather-query.query';
+import { ResourceQuery, GeneralQuery } from 'src/pso2-gather-query/queries/gather-query.query';
 import { GatherResourceQueryDto } from 'src/shared/models/gather-query-dto.model';
 
 @Controller('gather-query')
@@ -13,6 +13,12 @@ export class GatherQueryController {
   queryResource(@Body() query: GatherResourceQueryDto) {
     query.query = query.query.toLowerCase();
     return this.queryBus.execute(new ResourceQuery(query.query));
+  }
+
+  @Get('any/:query')
+  queryAny(@Param('query') query: string) {
+    query = query.toLowerCase();
+    return this.queryBus.execute(new GeneralQuery(query));
   }
 
   // @UseGuards(RequestValidatorGuard)
